@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>#{msg["students_page"]}</title>
+</h:head>
+<h:body>
+    <h:head>
+    </h:head>
+
+    <h:body>
+        <h:form>
+            <h:panelGrid columns = "2">
+                #{msg["language"]} :
+                <h:selectOneMenu value = "#{userData.locale}" onchange = "submit()"
+                                 valueChangeListener = "#{userData.localeChanged}">
+                    <f:selectItems value = "#{userData.countries}" />
+                </h:selectOneMenu>
+            </h:panelGrid>
+
+        </h:form>
+        <p:dataTable var="student" value="#{studentBean.getStudents()}">
+            <f:facet name="header">
+                #{msg['list_of_students']}
+            </f:facet>
+            <p:column headerText="ID">
+                #{student.getId()}
+            </p:column>
+            <p:column headerText="#{msg['name']}">
+                #{student.getName()}
+            </p:column>
+            <p:column headerText="#{msg['list_of_exams']}">
+                <p:dataTable var="exam" value="#{student.getExams()}">
+                    <f:facet name="header">
+                        #{msg["students_exams"]}
+                    </f:facet>
+                    <p:column headerText="ID">
+                        #{exam.getId()}
+                    </p:column>
+                    <p:column headerText="#{msg['name']}">
+                        #{exam.getName()}
+                    </p:column>
+                    <p:column headerText="#{msg['date']}">
+                        #{exam.getDate()}
+                    </p:column>
+                    <p:column headerText="#{msg['duration']}">
+                        #{exam.getDuration()}
+                    </p:column>
+                </p:dataTable>
+            </p:column>
+        </p:dataTable>
+        <h:form>
+            <h:inputText value="#{studentInputBean.name}" required="true" />
+            <h:commandButton value="#{msg['add_student']}"  action="#{studentInputBean.submit}" />
+            <h:messages />
+            <h:outputText value="#{studentInputBean.result}" />
+        </h:form>
+        <h:form>
+            <h:inputText value="#{enrolBean.studentId}" required="true" />
+            <h:inputText value="#{enrolBean.examId}" required="true" />
+            <h:commandButton value="#{msg['enroll_student']}"  action="#{enrolBean.submit}" />
+            <h:messages />
+            <h:outputText value="#{enrolBean.result}" />
+        </h:form>
+    </h:body>
+</h:body>
+</html>
