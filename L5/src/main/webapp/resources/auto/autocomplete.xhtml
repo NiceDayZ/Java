@@ -1,0 +1,17 @@
+<html xmlns = "http://www.w3.org/1999/xhtml"
+      xmlns:h = "http://java.sun.com/jsf/html"
+      xmlns:f = "http://java.sun.com/jsf/core"
+      xmlns:composite = "http://java.sun.com/jsf/composite"
+      xmlns:p="http://primefaces.org/ui">
+
+<composite:interface>
+    <composite:attribute name = "name" />
+    <composite:attribute name = "list" />
+</composite:interface>
+
+<composite:implementation>
+    <p:autoComplete value="#{cc.attrs.name}" completeMethod="#{cc.attrs.list}" scrollHeight="250" required="true" />
+</composite:implementation>
+
+</html>
+

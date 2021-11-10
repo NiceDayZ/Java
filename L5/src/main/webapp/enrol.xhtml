@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:custom = "http://java.sun.com/jsf/composite/auto">
+<h:head>
+    <title>#{msg['exams_page']}</title>
+</h:head>
+<h:body>
+    <ui:composition template = "page.xhtml">
+        <ui:define name = "content">
+
+            <h:form>
+                <p:inputText value="#{enrolBean.studentId}" required="true" />
+                <p:inputText value="#{enrolBean.examId}" required="true" />
+                <p:commandButton value="#{msg['enroll_student']}" ajax="false" action="#{enrolBean.submit}" />
+                <h:messages />
+                <h:outputText value="#{enrolBean.result}" />
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>
