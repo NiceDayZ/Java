@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>#{msg['exams_page']}</title>
+</h:head>
+<h:body>
+    <ui:composition template = "page.xhtml">
+        <ui:define name = "content">
+                <h:form>
+                    <h2>Insert</h2>
+                    <p:outputLabel for="studentName" value="#{msg['name']}" />
+                    <p:inputText id="studentName" value="#{studentInputBean.name}" required="true"/>
+                    <p:commandButton value="#{msg['add_student']}" ajax="false" action="#{studentInputBean.submit}"/>
+                    <h:messages />
+                    <h:outputText value="#{studentInputBean.result}" />
+                    <br/>
+                </h:form>
+                <h:form>
+                    <h2>Update</h2>
+                    <p:outputLabel for="nameStudent" value="#{msg['name']}" />
+                    <p:inputText id="nameStudent" value="#{updateStudentBean.nameStudent}" required="true"/>
+                    <p:outputLabel for="idStudent" value="id" />
+                    <p:inputText id="idStudent" value="#{updateStudentBean.idStudent}" required="true"/>
+                    <p:commandButton value="Update" ajax="false" action="#{updateStudentBean.updateStudent}"/>
+                    <h:messages />
+                    <h:outputText value="#{updateStudentBean.result}" />
+                    <br/>
+                </h:form>
+                <h:form>
+                    <h2>Delete</h2>
+                    <p:outputLabel for="studentId2" value="id" />
+                    <p:inputText id="studentId2" value="#{deleteStudentBean.idStudent}" required="true"/>
+                    <p:commandButton value="Delete" ajax="false" action="#{deleteStudentBean.deleteStudent}"/>
+                    <h:messages />
+                    <h:outputText value="#{deleteStudentBean.result}" />
+                </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

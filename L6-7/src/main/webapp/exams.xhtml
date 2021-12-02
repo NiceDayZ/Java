@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+   <title>#{msg['exams_page']}</title>
+</h:head>
+<h:body>
+      <ui:composition template = "page.xhtml">
+         <ui:define name = "content">
+            <p:dataTable var="exam" value="#{examBean.getExams()}">
+               <f:facet name="header">
+                  #{msg["list_of_exams"]}
+               </f:facet>
+               <p:column headerText="ID">
+                  #{exam.getId()}
+               </p:column>
+               <p:column headerText="#{msg['name']}">
+                  #{exam.getName()}
+               </p:column>
+               <p:column headerText="#{msg['date']}">
+                  #{exam.getDate()}
+               </p:column>
+               <p:column headerText="#{msg['duration']}">
+                  #{exam.getDuration()}
+               </p:column>
+               <p:column headerText="Resources">
+                  <ui:repeat var="string" value="#{examBean.getResources(exam.getId())}" varStatus="index">
+                     <h:outputText value="#{string}" />
+                     <ui:fragment rendered="#{!index.last}">,</ui:fragment>
+                  </ui:repeat>
+               </p:column>
+               <p:column headerText="File">
+                  <h:form>
+                     <p:commandButton id="downloadLink" ajax="false" value="Download PDF" actionListener="#{examBean.getFile(exam.getId())}"/>
+                  </h:form>
+               </p:column>
+            </p:dataTable>
+            <h:form>
+               <h:inputText value="#{examInputBean.name}" required="true" />
+               <h:inputText value="#{examInputBean.starting}" required="true" />
+               <h:inputText value="#{examInputBean.duration}" required="true" />
+               <h:commandButton value="#{msg['add_exam']}"  action="#{examInputBean.submit}" />
+               <h:messages />
+               <h:outputText value="#{examInputBean.result}" />
+            </h:form>
+         </ui:define>
+      </ui:composition>
+</h:body>
+</html>
