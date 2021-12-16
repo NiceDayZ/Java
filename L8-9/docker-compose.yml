@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+  service_a:
+    image: payara/micro
+    working_dir: /Users/mihaicraciun/School/demo2
+    command: java -Xmx2G -Xms1G -XX:+UseG1GC -Djava.net.preferIPv4Stack=true -jar service-a/target/demo-microbundle.jar
+    container_name: service_a
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+  service_b:
+    image: payara/micro
+    working_dir: /Users/mihaicraciun/School/demo2
+    command: java -Xmx2G -Xms1G -XX:+UseG1GC -Djava.net.preferIPv4Stack=true -jar service-b/target/demo-microbundle.jar --port 8180
+    container_name: service_b
+    ports:
+      - 8180:8180
+    expose:
+      - 8180
